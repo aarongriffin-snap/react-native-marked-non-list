@@ -1,11 +1,5 @@
-import React, {
-	memo,
-	ReactElement,
-	ReactNode,
-	useCallback,
-	useMemo,
-} from "react";
-import { FlatList, useColorScheme } from "react-native";
+import React, { memo, useMemo } from "react";
+import { useColorScheme, View } from "react-native";
 import { marked } from "marked";
 import Parser from "./Parser";
 import getStyles from "../theme/styles";
@@ -13,7 +7,6 @@ import type { MarkdownProps } from "./types";
 
 const Markdown = ({
 	value,
-	flatListProps,
 	theme,
 	baseUrl,
 	styles: userStyles,
@@ -30,26 +23,18 @@ const Markdown = ({
 		return parser.parse(tokens);
 	}, [value, styles, baseUrl]);
 
-	const renderItem = useCallback(({ item }: { item: ReactNode }) => {
-		return item as ReactElement;
-	}, []);
-
-	const keyExtractor = useCallback(
-		(_: ReactNode, index: number) => index.toString(),
-		[],
-	);
-
 	return (
-		<FlatList
-			removeClippedSubviews
-			keyExtractor={keyExtractor}
-			maxToRenderPerBatch={8}
-			initialNumToRender={8}
-			style={styles.container}
-			{...flatListProps}
-			data={rnElements}
-			renderItem={renderItem}
-		/>
+		<View style={styles.container}>{rnElements.map((el) => el)}</View>
+		// <FlatList
+		// 	removeClippedSubviews
+		// 	keyExtractor={keyExtractor}
+		// 	maxToRenderPerBatch={8}
+		// 	initialNumToRender={8}
+		// 	style={styles.container}
+		// 	{...flatListProps}
+		// 	data={rnElements}
+		// 	renderItem={renderItem}
+		// />
 	);
 };
 
