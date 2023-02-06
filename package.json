@@ -1,5 +1,5 @@
 {
-  "name": "@snap-dev/react-native-marked-non-list",
+  "name": "react-native-marked-non-list",
   "version": "1.6.12",
   "description": "Markdown renderer for React Native powered by marked.js",
   "main": "dist/commonjs/index",
